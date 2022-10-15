@@ -1,0 +1,5 @@
+[user]
+		name = thomas.chow
+		email = thomas0chow@gmail.com
+[includeIf "gitdir:~/code/work/cdk-ts-demo"]
+		path = ~/.gitconfig-work
