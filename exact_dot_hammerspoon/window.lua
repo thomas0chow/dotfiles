@@ -23,6 +23,19 @@ hs.hotkey.bind({"alt", "cmd"}, "q", function() hs.window.focusedWindow():close()
 -- minimize focused windows
 hs.hotkey.bind({"cmd"}, "m", function() hs.window.focusedWindow():minimize() end)
 
+-- windows sizing
+hs.hotkey.bind({"alt", "cmd"}, "s", function()
+	local win = hs.window.focusedWindow()
+	local f = win:frame()
+	local screen = win:screen()
+	local max = screen:frame()
+	
+	f.w = max.w / 2
+	f.h = max.h / 2
+	win:setFrame(f)
+	end
+)
+
 -- switch focus windows
 hs.hotkey.bind({"cmd"}, "l", function() hs.window.focusedWindow():focusWindowEast() end)
 hs.hotkey.bind({"cmd"}, "h", function() hs.window.focusedWindow():focusWindowWest() end)
