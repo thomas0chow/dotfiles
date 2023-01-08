@@ -74,6 +74,7 @@ set ai
 set hlsearch
 set ruler
 set incsearch
+setlocal spell spelllang=en_us
 highlight Comment ctermfg=green
 
 colorscheme nord
