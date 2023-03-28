@@ -33,13 +33,24 @@ return require("packer").startup(function(use)
 	use({
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.1",
-		requires = { { "nvim-lua/plenary.nvim" } },
+		requires = { 
+            "nvim-lua/plenary.nvim"
+        },
 	})
+
+    -- Folder
+    use ({
+        'kevinhwang91/nvim-ufo', 
+        requires = 'kevinhwang91/promise-async'
+    })
+
 
     -- coc
     use({
         "neoclide/coc.nvim",
-        branch = "release"
+        branch = "master",
+        run = "yarn install --frozen-lockfile"
     })
+    require("ufo").setup()
 
 end)
