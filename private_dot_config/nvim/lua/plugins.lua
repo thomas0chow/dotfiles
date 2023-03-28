@@ -48,9 +48,12 @@ return require("packer").startup(function(use)
     -- coc
     use({
         "neoclide/coc.nvim",
-        branch = "master",
-        run = "yarn install --frozen-lockfile"
+        branch = "release",
     })
     require("ufo").setup()
+
+    -- Scroll
+    use ('karb94/neoscroll.nvim')
+    require('neoscroll').setup()
 
 end)
