@@ -1,4 +1,6 @@
 {
-    "hover.floatConfig": { "border": true },
-    "suggest.floatConfig": { "border": true }
+  "hover.floatConfig": { "border": true },
+  "suggest.floatConfig": { "border": true },
+  "python.formatting.provider": "yapf",
+  "coc.preferences.formatOnSave": true
 }

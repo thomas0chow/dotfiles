@@ -36,11 +36,6 @@ return require("packer").startup(function(use)
 		requires = { { "nvim-lua/plenary.nvim" } },
 	})
 
-    -- Formatter
-    use({
-        "Chiel92/vim-autoformat"
-    })
-
     -- coc
     use({
         "neoclide/coc.nvim",
