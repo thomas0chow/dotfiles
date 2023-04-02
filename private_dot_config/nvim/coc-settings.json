@@ -1,6 +1,15 @@
 {
   "hover.floatConfig": { "border": true },
   "suggest.floatConfig": { "border": true },
+  "diagnostic.floatConfig": { "border": true },
   "python.formatting.provider": "yapf",
-  "coc.preferences.formatOnSave": true
+  "coc.preferences.formatOnSaveFiletypes": [
+    "python",
+    "typescript",
+    "json",
+    "javascript",
+    "go",
+    "yaml",
+    "markdown"
+  ]
 }
