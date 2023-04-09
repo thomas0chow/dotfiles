@@ -13,4 +13,4 @@ end
 
 -- Formatter
 -- vim.cmd [[autocmd BufWrite *.py call CocAction('format')]]
-vim.cmd [[autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')]]
+vim.cmd [[autocmd BufWritePre * :call CocAction('runCommand', 'editor.action.organizeImport')]]
