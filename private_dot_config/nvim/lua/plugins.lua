@@ -55,4 +55,12 @@ return require("packer").startup(function(use)
     -- Scroll
     use('karb94/neoscroll.nvim')
     require('neoscroll').setup()
+
+    -- Markdown Preview
+    -- install without yarn or npm
+    use({
+        "iamcco/markdown-preview.nvim",
+        run = function() vim.fn["mkdp#util#install"]() end,
+    })
+
 end)
