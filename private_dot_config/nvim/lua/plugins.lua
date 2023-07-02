@@ -63,4 +63,14 @@ return require("packer").startup(function(use)
         run = function() vim.fn["mkdp#util#install"]() end,
     })
 
+    -- competitest
+    use {
+        'xeluxee/competitest.nvim',
+        requires = 'MunifTanjim/nui.nvim',
+    }
+    require('competitest').setup {
+        run_command = {
+            python = { exec = "python3", args = { "$(FNAME)" } }
+        }
+    }
 end)
