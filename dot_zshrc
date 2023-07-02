@@ -91,7 +91,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Auto Suggestion
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="bg=cyan,bold,underline"
-ZSH_AUTOSUGGEST_STRATEGY=(completion history)
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -118,4 +118,7 @@ ZSH_AUTOSUGGEST_STRATEGY=(completion history)
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias py="python3"
+alias python="python3"
 alias cdk="npx cdk"
+alias note="jupyter notebook"
+alias lab="jupyter lab"
