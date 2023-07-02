@@ -73,4 +73,10 @@ return require("packer").startup(function(use)
             python = { exec = "python3", args = { "$(FNAME)" } }
         }
     }
+
+    -- Firenvim
+    use {
+        'glacambre/firenvim',
+        run = function() vim.fn['firenvim#install'](0) end
+    }
 end)
