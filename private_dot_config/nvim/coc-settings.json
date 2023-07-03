@@ -12,5 +12,6 @@
     "yaml",
     "markdown",
     "lua"
-  ]
+  ],
+  "clangd.path": "/usr/bin/clangd"
 }
