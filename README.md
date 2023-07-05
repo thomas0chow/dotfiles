@@ -1,6 +1,5 @@
 # Dotfile
 
-
 ## Chezmoi
 
 `chezmoi -v apply`

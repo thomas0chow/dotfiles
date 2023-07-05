@@ -58,6 +58,12 @@ keyset("n", "gy", "<Plug>(coc-type-definition)", { silent = true })
 keyset("n", "gi", "<Plug>(coc-implementation)", { silent = true })
 keyset("n", "gr", "<Plug>(coc-references)", { silent = true })
 
+-- Formating
+keyset("x", "<leader>f", "<Plug>(coc-format-selected)", { silent = true })
+keyset("n", "<leader>f", "<Plug>(coc-format-selected)", { silent = true })
+vim.api.nvim_create_user_command("Format", "call CocAction('format')", {})
+vim.cmd [[autocmd BufWritePre *.cc,*.hh : call CocAction('format')]]
+
 -- nvim-ufo
 vim.o.foldcolumn = '1' -- '0' is not bad
 vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
