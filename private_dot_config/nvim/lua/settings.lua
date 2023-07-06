@@ -23,7 +23,7 @@ vim.opt.inccommand = "split"
 
 -- coc
 vim.g.coc_global_extensions = { "coc-go", "coc-pyright", "coc-json", "coc-prettier", "coc-tsserver", "coc-spell-checker",
-    "coc-docker", "coc-git", "coc-lua", "@yaegassy/coc-nginx", "coc-yaml", "coc-clangd" }
+    "coc-docker", "coc-git", "coc-lua", "@yaegassy/coc-nginx", "coc-yaml", "coc-clangd", "coc-r-lsp" }
 
 local keyset = vim.keymap.set
 
