@@ -11,6 +11,7 @@
 
 [merge]
     conflictstyle = diff3
+    tool = nvimdiff
 
 [delta "decorations"]
     commit-decoration-style = blue ol
