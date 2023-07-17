@@ -87,3 +87,6 @@ vim.g.firenvim_config = {
         }
     }
 }
+
+-- floaterm
+vim.g.floaterm_keymap_toggle = "<leader>t"
