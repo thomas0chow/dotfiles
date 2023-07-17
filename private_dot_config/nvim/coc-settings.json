@@ -17,4 +17,5 @@
     "border": true
   },
   "clangd.path": "/usr/bin/clangd"
+  "clangd.fallbackFlags": ["-std=c++17"]
 }
