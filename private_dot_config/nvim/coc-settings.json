@@ -13,5 +13,8 @@
     "markdown",
     "lua"
   ],
+  "suggest.pumFloatConfig": {
+    "border": true
+  },
   "clangd.path": "/usr/bin/clangd"
 }
