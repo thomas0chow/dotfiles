@@ -12,6 +12,8 @@
     "yaml",
     "markdown",
     "lua"
+    "cc",
+    "hh"
   ],
   "suggest.pumFloatConfig": {
     "border": true
