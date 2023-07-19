@@ -40,8 +40,8 @@ return require("packer").startup(function(use)
 
     -- Folder
     use({
-        'kevinhwang91/nvim-ufo',
-        requires = 'kevinhwang91/promise-async'
+        "kevinhwang91/nvim-ufo",
+        requires = "kevinhwang91/promise-async"
     })
 
 
@@ -53,8 +53,8 @@ return require("packer").startup(function(use)
     require("ufo").setup()
 
     -- Scroll
-    use('karb94/neoscroll.nvim')
-    require('neoscroll').setup()
+    use("karb94/neoscroll.nvim")
+    require("neoscroll").setup()
 
     -- Markdown Preview
     -- install without yarn or npm
@@ -65,10 +65,10 @@ return require("packer").startup(function(use)
 
     -- competitest
     use {
-        'xeluxee/competitest.nvim',
-        requires = 'MunifTanjim/nui.nvim',
+        "xeluxee/competitest.nvim",
+        requires = "MunifTanjim/nui.nvim",
     }
-    require('competitest').setup {
+    require("competitest").setup {
         run_command = {
             python = { exec = "python3", args = { "$(FNAME)" } }
         }
@@ -76,10 +76,13 @@ return require("packer").startup(function(use)
 
     -- Firenvim
     use {
-        'glacambre/firenvim',
-        run = function() vim.fn['firenvim#install'](0) end
+        "glacambre/firenvim",
+        run = function() vim.fn["firenvim#install"](0) end
     }
 
     -- Floating terminal
-    use 'voldikss/vim-floaterm'
+    use "voldikss/vim-floaterm"
+
+    -- Jupyter
+    use("luk400/vim-jukit")
 end)

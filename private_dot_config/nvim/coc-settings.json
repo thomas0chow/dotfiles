@@ -11,13 +11,13 @@
     "go",
     "yaml",
     "markdown",
-    "lua"
+    "lua",
     "cc",
     "hh"
   ],
   "suggest.pumFloatConfig": {
     "border": true
   },
-  "clangd.path": "/usr/bin/clangd"
+  "clangd.path": "/usr/bin/clangd",
   "clangd.fallbackFlags": ["-std=c++17"]
 }
