@@ -78,5 +78,8 @@ return require("packer").startup(function(use)
     use "voldikss/vim-floaterm"
 
     -- Jupyter
-    use("luk400/vim-jukit")
+    use {
+        "luk400/vim-jukit",
+        ft = { "python" }
+    }
 end)
