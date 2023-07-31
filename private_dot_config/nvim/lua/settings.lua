@@ -76,17 +76,5 @@ keyset('n', 'zM', require('ufo').closeAllFolds)
 -- neo-tree
 keyset("n", "<leader>bb", ":NeoTreeShow<CR>", { silent = true })
 
--- firenvim
-vim.g.firenvim_config = {
-    localSettings = {
-        [".*"] = {
-            takeover = "never"
-        },
-        [".*ipynb"] = {
-            content = "python"
-        }
-    }
-}
-
 -- floaterm
 vim.g.floaterm_keymap_toggle = "<leader>t"
