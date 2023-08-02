@@ -2,7 +2,7 @@
   "hover.floatConfig": { "border": true },
   "suggest.floatConfig": { "border": true },
   "diagnostic.floatConfig": { "border": true },
-  "python.formatting.provider": "yapf",
+  "python.formatting.provider": "black",
   "coc.preferences.formatOnSaveFiletypes": [
     "python",
     "typescript",
