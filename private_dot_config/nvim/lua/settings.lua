@@ -79,3 +79,6 @@ keyset("n", "<leader>bb", ":NeoTreeShow<CR>", { silent = true })
 
 -- floaterm
 vim.g.floaterm_keymap_toggle = "<leader>t"
+
+-- vim-jukit
+keyset("n", "<leader><cr>", ':call jukit#send#line()<cr>', { noremap = true, silent = true })
