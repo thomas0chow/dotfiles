@@ -2,7 +2,9 @@
   "hover.floatConfig": { "border": true },
   "suggest.floatConfig": { "border": true },
   "diagnostic.floatConfig": { "border": true },
-  "python.formatting.provider": "black",
+  "python.formatting.provider": "none",
+  "ruff.enableExperimentalFormatter": true,
+  "ruff.autoFixOnSave": true,
   "coc.preferences.formatOnSaveFiletypes": [
     "python",
     "typescript",

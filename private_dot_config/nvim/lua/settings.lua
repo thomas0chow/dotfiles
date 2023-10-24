@@ -24,7 +24,8 @@ vim.o.swapfile = "false"
 
 -- coc
 vim.g.coc_global_extensions = { "coc-go", "coc-pyright", "coc-json", "coc-prettier", "coc-tsserver", "coc-spell-checker",
-    "coc-docker", "coc-git", "coc-lua", "@yaegassy/coc-nginx", "coc-yaml", "coc-clangd", "coc-r-lsp" }
+    "coc-docker", "coc-git", "coc-lua", "@yaegassy/coc-nginx", "coc-yaml", "coc-clangd", "coc-r-lsp",
+    "@yaegassy/coc-ruff" }
 
 local keyset = vim.keymap.set
 
