@@ -21,5 +21,11 @@
     "border": true
   },
   "clangd.path": "/usr/bin/clangd",
-  "clangd.fallbackFlags": ["-std=c++17"]
+  "clangd.fallbackFlags": ["-std=c++17"],
+  "htmldjango.djlint.commandPath": "/opt/homebrew/bin/djlint",
+  "htmldjango.hoverLang": "django",
+  "htmldjango.djlint.enableLint": true,
+  "htmldjango.djlint.lintOnSave": true,
+  "htmldjango.djlint.lintOnChange": true,
+  "htmldjango.djlint.lintOnOpen": true
 }

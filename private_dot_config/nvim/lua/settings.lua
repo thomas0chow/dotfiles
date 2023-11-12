@@ -25,7 +25,7 @@ vim.o.swapfile = "false"
 -- coc
 vim.g.coc_global_extensions = { "coc-go", "coc-pyright", "coc-json", "coc-prettier", "coc-tsserver", "coc-spell-checker",
     "coc-docker", "coc-git", "coc-lua", "@yaegassy/coc-nginx", "coc-yaml", "coc-clangd", "coc-r-lsp",
-    "@yaegassy/coc-ruff" }
+    "@yaegassy/coc-ruff", "coc-htmldjango", "coc-html", "coc-css", "coc-sql" }
 
 local keyset = vim.keymap.set
 
@@ -80,3 +80,13 @@ keyset("n", "<leader>bb", ":NeoTreeShow<CR>", { silent = true })
 
 -- floaterm
 vim.g.floaterm_keymap_toggle = "<leader>t"
+
+-- django html template
+vim.api.nvim_create_autocmd("BufWritePre", {
+    pattern = "*.html",
+    callback = function()
+        if vim.bo.filetype == "htmldjango" then
+            vim.cmd("CocCommand htmldjango.djlint.format")
+        end
+    end
+})
