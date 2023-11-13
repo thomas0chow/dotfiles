@@ -15,7 +15,8 @@
     "markdown",
     "lua",
     "cc",
-    "hh"
+    "hh",
+    "vue"
   ],
   "suggest.pumFloatConfig": {
     "border": true
