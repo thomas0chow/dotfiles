@@ -28,5 +28,6 @@
   "htmldjango.djlint.enableLint": true,
   "htmldjango.djlint.lintOnSave": true,
   "htmldjango.djlint.lintOnChange": true,
-  "htmldjango.djlint.lintOnOpen": true
+  "htmldjango.djlint.lintOnOpen": true,
+  "htmldjango.djlint.formatCss": true
 }
