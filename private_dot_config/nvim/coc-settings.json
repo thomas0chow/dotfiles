@@ -29,5 +29,6 @@
   "htmldjango.djlint.lintOnSave": true,
   "htmldjango.djlint.lintOnChange": true,
   "htmldjango.djlint.lintOnOpen": true,
-  "htmldjango.djlint.formatCss": true
+  "htmldjango.djlint.formatCss": true,
+  "volar.takeOverMode.enabled": true
 }
