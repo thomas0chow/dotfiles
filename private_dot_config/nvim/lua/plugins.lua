@@ -74,6 +74,10 @@ return require("packer").startup(function(use)
         }
     }
 
+    -- Commment.nvim
+    use('numToStr/Comment.nvim')
+    require('Comment').setup()
+
     -- Floating terminal
     use "voldikss/vim-floaterm"
 end)
