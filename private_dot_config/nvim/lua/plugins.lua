@@ -80,4 +80,7 @@ return require("packer").startup(function(use)
 
     -- Floating terminal
     use "voldikss/vim-floaterm"
+
+    -- Diffview
+    use("sindrets/diffview.nvim")
 end)
