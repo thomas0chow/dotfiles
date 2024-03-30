@@ -135,8 +135,8 @@ ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(bracketed-paste)
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias py="python3"
-alias python="python3"
+alias py="python3.11"
+alias python="python3.11"
 alias cdk="npx cdk"
 alias note="jupyter notebook"
 alias lab="jupyter lab"
