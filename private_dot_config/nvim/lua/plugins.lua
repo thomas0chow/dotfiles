@@ -6,19 +6,14 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 })
 
 return require("packer").startup(function(use)
-    -- Packer
     use("wbthomason/packer.nvim")
 
-    -- Common utilities
     use("nvim-lua/plenary.nvim")
 
-    -- Icons
     use("nvim-tree/nvim-web-devicons")
 
-    -- Colorschema
     use("shaunsingh/nord.nvim")
 
-    -- File manager
     use({
         "nvim-neo-tree/neo-tree.nvim",
         branch = "v2.x",
@@ -29,7 +24,6 @@ return require("packer").startup(function(use)
         },
     })
 
-    -- Telescope
     use({
         "nvim-telescope/telescope.nvim",
         tag = "0.1.4",
@@ -38,32 +32,26 @@ return require("packer").startup(function(use)
         },
     })
 
-    -- Folder
     use({
         "kevinhwang91/nvim-ufo",
         requires = "kevinhwang91/promise-async"
     })
 
 
-    -- coc
     use({
         "neoclide/coc.nvim",
         branch = "release",
     })
     require("ufo").setup()
 
-    -- Scroll
     use("karb94/neoscroll.nvim")
     require("neoscroll").setup()
 
-    -- Markdown Preview
-    -- install without yarn or npm
     use({
         "iamcco/markdown-preview.nvim",
         run = function() vim.fn["mkdp#util#install"]() end,
     })
 
-    -- competitest
     use {
         "xeluxee/competitest.nvim",
         requires = "MunifTanjim/nui.nvim",
@@ -74,13 +62,12 @@ return require("packer").startup(function(use)
         }
     }
 
-    -- Commment.nvim
     use('numToStr/Comment.nvim')
     require('Comment').setup()
 
-    -- Floating terminal
     use "voldikss/vim-floaterm"
 
-    -- Diffview
     use("sindrets/diffview.nvim")
+
+    use { 'smithbm2316/centerpad.nvim' }
 end)
