@@ -87,6 +87,8 @@ keyset("n", "<leader>bb", ":NeoTreeShow<CR>", { silent = true })
 
 -- floaterm
 vim.g.floaterm_keymap_toggle = "<leader>t"
+vim.g.floaterm_wintype = "split"
+vim.g.floaterm_height = 0.25
 
 -- django html template
 vim.api.nvim_create_autocmd("BufWritePre", {
