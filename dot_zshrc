@@ -82,6 +82,7 @@ plugins=(
 		zsh-autosuggestions
 		zsh-vi-mode
 		zsh-syntax-highlighting
+        autoupdate
 		)
 
 # Autojump
@@ -90,6 +91,11 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+
+# Auto upgrade
+
+# to check for updates once a month
+export UPDATE_ZSH_DAYS=30
 
 # Auto Suggestion
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="bg=cyan,bold,underline"
