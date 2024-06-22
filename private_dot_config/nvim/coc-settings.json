@@ -4,8 +4,8 @@
   "diagnostic.floatConfig": { "border": true },
   "prettier.trailingComma": "all",
   "python.formatting.provider": "none",
-  "ruff.enableExperimentalFormatter": true,
-  "ruff.autoFixOnSave": true,
+  "python.linting.ruffEnabled": true,
+  "pyright.organizeimports.provider": "ruff",
   "coc.preferences.formatOnSaveFiletypes": [
     "python",
     "typescript",
