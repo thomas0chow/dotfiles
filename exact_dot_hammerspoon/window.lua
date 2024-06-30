@@ -30,7 +30,7 @@ hs.hotkey.bind({ "cmd" }, "h", function() hs.window.focusedWindow():focusWindowW
 hs.hotkey.bind({ "cmd" }, "j", function() hs.window.focusedWindow():focusWindowSouth() end)
 hs.hotkey.bind({ "cmd" }, "k", function() hs.window.focusedWindow():focusWindowNorth() end)
 
--- focus on fontmost window
+-- focus on frontmost window
 hs.hotkey.bind({ "cmd" }, "space", function() hs.window.frontmostWindow():focus() end)
 
 -- move between screen
