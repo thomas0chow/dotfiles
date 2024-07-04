@@ -1,4 +1,4 @@
-- Editor options
+-- Editor options
 
 vim.opt.number = true
 vim.opt.clipboard = "unnamedplus"
