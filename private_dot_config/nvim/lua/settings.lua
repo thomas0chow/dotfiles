@@ -24,7 +24,7 @@ vim.opt.wildmenu = true
 vim.opt.showcmd = true
 vim.opt.showmatch = true
 vim.opt.inccommand = "split"
-vim.o.swapfile = "false"
+vim.o.swapfile = false
 
 -- Plug settings
 

@@ -16,7 +16,7 @@
     "coc-html": ">=1.8.0",
     "coc-htmldjango": ">=0.14.11",
     "coc-sql": ">=0.11.0",
-    "@yaegassy/coc-mypy": ">=0.1.5"
+    "coc-pyright": ">=1.1.370"
   },
-  "lastUpdate": 1720257189089
+  "lastUpdate": 1720258704975
 }
