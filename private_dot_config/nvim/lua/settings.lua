@@ -28,9 +28,6 @@ vim.o.swapfile = "false"
 
 -- Plug settings
 
--- coc
-vim.g.coc_global_extensions = { "coc-go", "coc-pyright", "coc-json", "coc-prettier", "coc-tsserver", "coc-spell-checker", "coc-docker", "coc-git", "coc-lua", "@yaegassy/coc-nginx", "coc-yaml", "coc-clangd", "coc-r-lsp", "coc-htmldjango", "coc-html", "coc-css", "coc-sql", "@yaegassy/coc-volar", "@yaegassy/coc-volar-tools" }
-
 local keyset = vim.keymap.set
 
 function _G.check_back_space()
