@@ -83,7 +83,6 @@ plugins=(
 		zsh-autosuggestions
 		zsh-vi-mode
 		zsh-syntax-highlighting
-        autoupdate
 		)
 
 # Autojump
