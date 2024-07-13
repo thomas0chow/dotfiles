@@ -70,4 +70,11 @@ return require("packer").startup(function(use)
     use("sindrets/diffview.nvim")
 
     use { 'smithbm2316/centerpad.nvim' }
+
+    use {
+    "kwkarlwang/bufresize.nvim",
+    config = function()
+        require("bufresize").setup()
+    end
+}
 end)
