@@ -6,6 +6,8 @@
   "python.formatting.provider": "none",
   "python.linting.ruffEnabled": true,
   "pyright.organizeimports.provider": "ruff",
+  "pyright.inlayHints.variableTypes": false,
+  "pyright.inlayHints.parameterTypes": false,
   "coc.preferences.formatOnSaveFiletypes": [
     "python",
     "typescript",
