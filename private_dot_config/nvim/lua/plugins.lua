@@ -32,6 +32,13 @@ return require("packer").startup(function(use)
         },
     })
 
+    require('telescope').setup{
+      defaults = {
+        layout_strategy = 'vertical',
+        layout_config = { height = 0.8 },
+      },
+    }
+
     use({
         "kevinhwang91/nvim-ufo",
         requires = "kevinhwang91/promise-async"
