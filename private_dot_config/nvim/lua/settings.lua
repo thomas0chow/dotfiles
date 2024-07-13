@@ -77,7 +77,7 @@ keyset('n', 'zR', require('ufo').openAllFolds)
 keyset('n', 'zM', require('ufo').closeAllFolds)
 
 -- neo-tree
-keyset("n", "<leader>bb", ":NeoTreeShow<CR>", { silent = true })
+keyset("n", "<leader>bb", ":Neotree toggle<CR>", { silent = true })
 
 -- floaterm
 vim.g.floaterm_keymap_toggle = "<leader>t"
