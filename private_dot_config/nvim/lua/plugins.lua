@@ -51,13 +51,16 @@ return require("packer").startup(function(use)
         "kevinhwang91/nvim-ufo",
         requires = "kevinhwang91/promise-async"
     })
-
+    require('ufo').setup({
+    provider_selector = function(bufnr, filetype, buftype)
+        return {'treesitter', 'indent'}
+    end
+    })
 
     use({
         "neoclide/coc.nvim",
         branch = "release",
     })
-    require("ufo").setup()
 
     use("karb94/neoscroll.nvim")
     require("neoscroll").setup()
