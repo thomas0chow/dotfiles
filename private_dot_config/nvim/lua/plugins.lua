@@ -11,7 +11,6 @@ return require("packer").startup(function(use)
     use("nvim-lua/plenary.nvim")
 
     use("nvim-tree/nvim-web-devicons")
-
     use("shaunsingh/nord.nvim")
 
     use({
@@ -40,11 +39,11 @@ return require("packer").startup(function(use)
         },
     })
 
-    require('telescope').setup{
-      defaults = {
-        layout_strategy = 'vertical',
-        layout_config = { height = 0.8 },
-      },
+    require('telescope').setup {
+        defaults = {
+            layout_strategy = 'vertical',
+            layout_config = { height = 0.8 },
+        },
     }
 
     use({
@@ -52,9 +51,9 @@ return require("packer").startup(function(use)
         requires = "kevinhwang91/promise-async"
     })
     require('ufo').setup({
-    provider_selector = function(bufnr, filetype, buftype)
-        return {'treesitter', 'indent'}
-    end
+        provider_selector = function(bufnr, filetype, buftype)
+            return { 'treesitter', 'indent' }
+        end
     })
 
     use({
@@ -90,9 +89,9 @@ return require("packer").startup(function(use)
     use { 'smithbm2316/centerpad.nvim' }
 
     use {
-    "kwkarlwang/bufresize.nvim",
-    config = function()
-        require("bufresize").setup()
-    end
-}
+        "kwkarlwang/bufresize.nvim",
+        config = function()
+            require("bufresize").setup()
+        end
+    }
 end)
