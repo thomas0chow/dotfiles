@@ -3,7 +3,7 @@
   "suggest.floatConfig": { "border": true },
   "diagnostic.floatConfig": { "border": true },
   "prettier.trailingComma": "all",
-  "python.formatting.provider": "none",
+  "python.formatting.provider": "ruff",
   "python.linting.ruffEnabled": true,
   "pyright.organizeimports.provider": "ruff",
   "pyright.inlayHints.variableTypes": false,
