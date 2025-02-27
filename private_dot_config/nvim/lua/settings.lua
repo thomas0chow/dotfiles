@@ -96,3 +96,8 @@ vim.api.nvim_create_autocmd("BufWritePre", {
         end
     end
 })
+
+-- CopilotChat
+keyset("n", "<leader>cc", ":CopilotChat<CR>", { silent = true })
+keyset("n", "<leader>co", ":CopilotChatOpen<CR>", { silent = true })
+keyset("n", "<leader>cx", ":CopilotChatClose<CR>", { silent = true })

@@ -6,13 +6,18 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 })
 
 return require("packer").startup(function(use)
+    -- Packer can manage itself
     use("wbthomason/packer.nvim")
 
+    -- Common dependencies
     use("nvim-lua/plenary.nvim")
-
     use("nvim-tree/nvim-web-devicons")
+    use("MunifTanjim/nui.nvim")
+
+    -- Theme
     use("shaunsingh/nord.nvim")
 
+    -- File explorer
     use({
         "nvim-neo-tree/neo-tree.nvim",
         branch = "v3.x",
@@ -21,77 +26,115 @@ return require("packer").startup(function(use)
             "nvim-tree/nvim-web-devicons",
             "MunifTanjim/nui.nvim",
         },
-    })
-
-    require("neo-tree").setup({
-        filesystem = {
-            window = {
-                position = "float"
-            }
-        }
-    })
-
-    use({
-        "nvim-telescope/telescope.nvim",
-        tag = "0.1.4",
-        requires = {
-            "nvim-lua/plenary.nvim"
-        },
-    })
-
-    require('telescope').setup {
-        defaults = {
-            layout_strategy = 'vertical',
-            layout_config = { height = 0.8 },
-        },
-    }
-
-    use({
-        "kevinhwang91/nvim-ufo",
-        requires = "kevinhwang91/promise-async"
-    })
-    require('ufo').setup({
-        provider_selector = function(bufnr, filetype, buftype)
-            return { 'treesitter', 'indent' }
+        config = function()
+            require("neo-tree").setup({
+                filesystem = {
+                    window = {
+                        position = "float"
+                    }
+                }
+            })
         end
     })
 
+    -- Fuzzy finder
+    use({
+        "nvim-telescope/telescope.nvim",
+        tag = "0.1.4",
+        requires = { "nvim-lua/plenary.nvim" },
+        config = function()
+            require('telescope').setup {
+                defaults = {
+                    layout_strategy = 'vertical',
+                    layout_config = { height = 0.8 },
+                },
+            }
+        end
+    })
+
+    -- Folding
+    use({
+        "kevinhwang91/nvim-ufo",
+        requires = "kevinhwang91/promise-async",
+        config = function()
+            require('ufo').setup({
+                provider_selector = function(bufnr, filetype, buftype)
+                    return { 'treesitter', 'indent' }
+                end
+            })
+        end
+    })
+
+    -- Completion
     use({
         "neoclide/coc.nvim",
         branch = "release",
     })
 
-    use("karb94/neoscroll.nvim")
-    require("neoscroll").setup()
+    -- Smooth scrolling
+    use({
+        "karb94/neoscroll.nvim",
+        config = function()
+            require("neoscroll").setup()
+        end
+    })
 
+    -- Markdown preview
     use({
         "iamcco/markdown-preview.nvim",
         run = function() vim.fn["mkdp#util#install"]() end,
     })
 
-    use {
+    -- Competitive programming
+    use({
         "xeluxee/competitest.nvim",
         requires = "MunifTanjim/nui.nvim",
-    }
-    require("competitest").setup {
-        run_command = {
-            python = { exec = "python3", args = { "$(FNAME)" } }
-        }
-    }
+        config = function()
+            require("competitest").setup {
+                run_command = {
+                    python = { exec = "python3", args = { "$(FNAME)" } }
+                }
+            }
+        end
+    })
 
-    use('numToStr/Comment.nvim')
-    require('Comment').setup()
+    -- Commenting
+    use({
+        'numToStr/Comment.nvim',
+        config = function()
+            require('Comment').setup()
+        end
+    })
 
-    use "voldikss/vim-floaterm"
+    -- Terminal
+    use("voldikss/vim-floaterm")
 
+    -- Git diff view
     use("sindrets/diffview.nvim")
 
-    use { 'smithbm2316/centerpad.nvim' }
+    -- Center pad
+    use('smithbm2316/centerpad.nvim')
 
-    use {
+    -- Buffer resize
+    use({
         "kwkarlwang/bufresize.nvim",
         config = function()
             require("bufresize").setup()
         end
-    }
+    })
+
+    -- Copilot Chat
+    use({
+        'CopilotC-Nvim/CopilotChat.nvim',
+        requires = {
+            { 'github/copilot.vim' },
+            { 'nvim-lua/plenary.nvim', branch = 'master' },
+        },
+        run = "make tiktoken",
+        config = function()
+            require("CopilotChat").setup({
+                model = "claude-3.7-sonnet-thought",
+            })
+        end
+    })
 end)
