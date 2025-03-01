@@ -134,6 +134,7 @@ return require("packer").startup(function(use)
         config = function()
             require("CopilotChat").setup({
                 model = "claude-3.7-sonnet-thought",
+                chat_autocomplete = false
             })
         end
     })
