@@ -150,5 +150,9 @@ alias note="jupyter notebook"
 alias lab="jupyter lab"
 alias p="poetry"
 
+if [[ -f "$HOME/Code/claude_api.txt" ]]; then
+  export ANTHROPIC_API_KEY=$(cat "$HOME/Code/claude_api.txt" | tr -d '\n')
+fi
+
 # Amazon Q post block. Keep at the bottom of this file.
 [[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"

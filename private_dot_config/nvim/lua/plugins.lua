@@ -123,9 +123,13 @@ return require("packer").startup(function(use)
         end
     })
 
+
+    local is_personal_machine = vim.fn.hostname() == "stoneage.local"
+
     -- Copilot Chat
     use({
         'CopilotC-Nvim/CopilotChat.nvim',
+        disable = is_personal_machine,
         requires = {
             { 'github/copilot.vim' },
             { 'nvim-lua/plenary.nvim', branch = 'master' },
@@ -138,4 +142,30 @@ return require("packer").startup(function(use)
             })
         end
     })
+
+
+    -- Avante
+    use 'nvim-treesitter/nvim-treesitter'
+    use 'stevearc/dressing.nvim'
+    use 'MeanderingProgrammer/render-markdown.nvim'
+    use 'hrsh7th/nvim-cmp'
+    use 'HakonHarnes/img-clip.nvim'
+    use 'zbirenbaum/copilot.lua'
+
+    use {
+        'yetone/avante.nvim',
+        disable = not is_personal_machine,
+        branch = 'main',
+        run = 'make',
+        config = function()
+            require('avante').setup({
+                claude = {
+                    model = "claude-3-7-sonnet-20250219"
+                },
+                behaviour = {
+                    auto_suggestions = true,
+                }
+            })
+        end
+    }
 end)
