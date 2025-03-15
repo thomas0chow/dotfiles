@@ -124,7 +124,7 @@ return require("packer").startup(function(use)
     })
 
 
-    local is_personal_machine = vim.fn.hostname() == "stoneage.local"
+    local is_personal_machine = vim.fn.hostname() == "bronzeage.local"
 
     -- Copilot Chat
     use({
