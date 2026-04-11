@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(chezmoi managed:*)",
+      "Bash(chezmoi source-dir:*)",
+      "Bash(chezmoi --help)",
+      "Bash(chezmoi add:*)"
+    ]
+  }
+}

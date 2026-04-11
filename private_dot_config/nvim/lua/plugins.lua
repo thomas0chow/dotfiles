@@ -43,9 +43,9 @@ return require("packer").startup(function(use)
         tag = "0.1.4",
         requires = { "nvim-lua/plenary.nvim" },
         config = function()
-            require('telescope').setup {
+            require("telescope").setup {
                 defaults = {
-                    layout_strategy = 'vertical',
+                    layout_strategy = "vertical",
                     layout_config = { height = 0.8 },
                 },
             }
@@ -57,9 +57,9 @@ return require("packer").startup(function(use)
         "kevinhwang91/nvim-ufo",
         requires = "kevinhwang91/promise-async",
         config = function()
-            require('ufo').setup({
+            require("ufo").setup({
                 provider_selector = function(bufnr, filetype, buftype)
-                    return { 'treesitter', 'indent' }
+                    return { "treesitter", "indent" }
                 end
             })
         end
@@ -100,9 +100,9 @@ return require("packer").startup(function(use)
 
     -- Commenting
     use({
-        'numToStr/Comment.nvim',
+        "numToStr/Comment.nvim",
         config = function()
-            require('Comment').setup()
+            require("Comment").setup()
         end
     })
 
@@ -113,7 +113,7 @@ return require("packer").startup(function(use)
     use("sindrets/diffview.nvim")
 
     -- Center pad
-    use('smithbm2316/centerpad.nvim')
+    use("smithbm2316/centerpad.nvim")
 
     -- Buffer resize
     use({
@@ -124,48 +124,23 @@ return require("packer").startup(function(use)
     })
 
 
-    local is_personal_machine = vim.fn.hostname() == "bronzeage.local"
 
-    -- Copilot Chat
     use({
-        'CopilotC-Nvim/CopilotChat.nvim',
-        disable = is_personal_machine,
+        "nvim-treesitter/nvim-treesitter",
+        branch = "master",
+        run = ":TSUpdate",
+    })
+    use "stevearc/dressing.nvim"
+    use "MeanderingProgrammer/render-markdown.nvim"
+    use "hrsh7th/nvim-cmp"
+    use "HakonHarnes/img-clip.nvim"
+
+    use({
+        "zbirenbaum/copilot.lua",
         requires = {
-            { 'github/copilot.vim' },
-            { 'nvim-lua/plenary.nvim', branch = 'master' },
-        },
-        run = "make tiktoken",
-        config = function()
-            require("CopilotChat").setup({
-                model = "claude-3.7-sonnet-thought",
-                chat_autocomplete = false
-            })
-        end
+            "copilotlsp-nvim/copilot-lsp", -- (optional) for NES functionality
+        }
     })
 
-
-    -- Avante
-    use 'nvim-treesitter/nvim-treesitter'
-    use 'stevearc/dressing.nvim'
-    use 'MeanderingProgrammer/render-markdown.nvim'
-    use 'hrsh7th/nvim-cmp'
-    use 'HakonHarnes/img-clip.nvim'
-    use 'zbirenbaum/copilot.lua'
-
-    use {
-        'yetone/avante.nvim',
-        disable = not is_personal_machine,
-        branch = 'main',
-        run = 'make',
-        config = function()
-            require('avante').setup({
-                claude = {
-                    model = "claude-3-7-sonnet-20250219"
-                },
-                behaviour = {
-                    auto_suggestions = true,
-                }
-            })
-        end
-    }
+    use("esmuellert/codediff.nvim")
 end)
