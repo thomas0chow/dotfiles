@@ -155,13 +155,8 @@ require("lazy").setup({
                 },
             })
 
-            -- Bordered floats for hover and diagnostics
-            vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-                vim.lsp.handlers.hover, { border = "rounded" }
-            )
-            vim.diagnostic.config({
-                float = { border = "rounded" },
-            })
+            -- Rounded borders for all LSP floats (hover, diagnostics, signature)
+            vim.o.winborder = "rounded"
 
             vim.lsp.enable({ "pyright", "clangd", "ts_ls", "html", "vue_ls", "gopls", "lua_ls", "jsonls" })
 
