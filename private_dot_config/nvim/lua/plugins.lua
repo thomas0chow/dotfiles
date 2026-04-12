@@ -128,7 +128,7 @@ return require("packer").startup(function(use)
     use({
         "nvim-treesitter/nvim-treesitter",
         branch = "master",
-        run = ":TSUpdate",
+        run = function() vim.cmd("TSUpdate") end,
     })
     use "stevearc/dressing.nvim"
     use "MeanderingProgrammer/render-markdown.nvim"
@@ -143,4 +143,12 @@ return require("packer").startup(function(use)
     })
 
     use("esmuellert/codediff.nvim")
+
+    -- CSV viewer
+    use({
+        "hat0uma/csvview.nvim",
+        config = function()
+            require("csvview").setup()
+        end
+    })
 end)
