@@ -338,7 +338,6 @@ require("lazy").setup({
     },
 
 
-    { "stevearc/dressing.nvim",              event = "VeryLazy" },
     { "MeanderingProgrammer/render-markdown.nvim", ft = "markdown", enabled = false },
     { "HakonHarnes/img-clip.nvim",           event = "VeryLazy" },
 
