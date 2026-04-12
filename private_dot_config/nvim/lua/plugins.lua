@@ -82,7 +82,7 @@ require("lazy").setup({
         config = function()
             require("ufo").setup({
                 provider_selector = function(_, _, _)
-                    return { "treesitter", "indent" }
+                    return { "lsp", "indent" }
                 end
             })
         end,
@@ -350,16 +350,9 @@ require("lazy").setup({
         end,
     },
 
-    -- Treesitter (eager — core syntax highlighting)
-    {
-        "nvim-treesitter/nvim-treesitter",
-        lazy = false,
-        branch = "master",
-        build = function() vim.cmd("TSUpdate") end,
-    },
 
     { "stevearc/dressing.nvim",              event = "VeryLazy" },
-    { "MeanderingProgrammer/render-markdown.nvim", ft = "markdown" },
+    { "MeanderingProgrammer/render-markdown.nvim", ft = "markdown", enabled = false },
     { "HakonHarnes/img-clip.nvim",           event = "VeryLazy" },
 
     {
