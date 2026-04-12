@@ -17,13 +17,25 @@ require("lazy").setup({
     { "nvim-tree/nvim-web-devicons", lazy = false },
     { "MunifTanjim/nui.nvim",        lazy = false },
 
-    -- Theme
+    -- Themes (all eager so they're available for the selector)
+    { "shaunsingh/nord.nvim",  lazy = false, priority = 1000 },
+    { "rose-pine/neovim",      lazy = false, priority = 1000, name = "rose-pine" },
+
+    -- Auto dark/light mode based on macOS system appearance
     {
-        "shaunsingh/nord.nvim",
+        "f-person/auto-dark-mode.nvim",
         lazy = false,
-        priority = 1000,
+        priority = 999,
         config = function()
-            vim.cmd("colorscheme nord")
+            require("auto-dark-mode").setup({
+                update_interval = 3000,
+                set_dark_mode = function()
+                    vim.cmd("colorscheme nord")
+                end,
+                set_light_mode = function()
+                    vim.cmd("colorscheme rose-pine-dawn")
+                end,
+            })
         end,
     },
 

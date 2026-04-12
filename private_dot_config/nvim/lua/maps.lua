@@ -34,6 +34,21 @@ vim.api.nvim_create_autocmd("VimResized", {
     end,
 })
 
+-- Theme selector (\th)
+map("n", "\\th", function()
+    local themes = {
+        "nord",
+        "rose-pine",
+        "rose-pine-moon",
+        "rose-pine-dawn",
+    }
+    vim.ui.select(themes, { prompt = "Select theme:" }, function(choice)
+        if choice then
+            vim.cmd("colorscheme " .. choice)
+        end
+    end)
+end)
+
 -- Telescope
 map("n", "<leader>ff", function() require("telescope.builtin").find_files() end)
 map("n", "<leader>fg", function() require("telescope.builtin").live_grep() end)
