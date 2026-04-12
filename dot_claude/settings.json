@@ -2,7 +2,7 @@
   "model": "opusplan",
   "statusLine": {
     "type": "command",
-    "command": "bash /Users/s.zhou/.claude/statusline-command.sh"
+    "command": "bash ~/.claude/statusline-command.sh"
   },
   "enabledPlugins": {
     "github@claude-plugins-official": false,
