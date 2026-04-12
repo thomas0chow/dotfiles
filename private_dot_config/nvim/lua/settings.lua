@@ -2,7 +2,6 @@
 
 vim.opt.number = true
 vim.opt.clipboard = "unnamedplus"
-vim.opt.syntax = "on"
 vim.opt.autoindent = true
 vim.opt.cursorline = true
 vim.opt.expandtab = true
@@ -15,13 +14,9 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.opt.encoding = "UTF-8"
-vim.opt.ruler = true
 vim.opt.mouse = "a"
 vim.opt.title = true
-vim.opt.hidden = true
 vim.opt.ttimeoutlen = 0
-vim.opt.wildmenu = true
-vim.opt.showcmd = true
 vim.opt.showmatch = true
 vim.opt.inccommand = "split"
 vim.o.swapfile = false

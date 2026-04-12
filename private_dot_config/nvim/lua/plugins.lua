@@ -61,7 +61,6 @@ require("lazy").setup({
     -- Fuzzy finder
     {
         "nvim-telescope/telescope.nvim",
-        tag = "0.1.4",
         event = "VeryLazy",
         dependencies = { "nvim-lua/plenary.nvim" },
         config = function()
@@ -173,7 +172,7 @@ require("lazy").setup({
                     map("n", "K", vim.lsp.buf.hover)
                     map("n", "<leader>rr", vim.lsp.buf.rename)
                     map({ "n", "x" }, "<leader>f", function()
-                        require("conform").format({ bufnr = ev.buf, lsp_fallback = true })
+                        require("conform").format({ bufnr = ev.buf, lsp_format = "fallback" })
                     end)
                 end,
             })
@@ -214,7 +213,7 @@ require("lazy").setup({
                 },
                 format_on_save = {
                     timeout_ms   = 500,
-                    lsp_fallback = true,
+                    lsp_format = "fallback",
                 },
             })
         end,
@@ -248,18 +247,6 @@ require("lazy").setup({
                     python = { exec = "python3", args = { "$(FNAME)" } }
                 }
             }
-        end,
-    },
-
-    -- Commenting
-    {
-        "numToStr/Comment.nvim",
-        keys = {
-            { "gc", mode = { "n", "v" } },
-            { "gb", mode = { "n", "v" } },
-        },
-        config = function()
-            require("Comment").setup()
         end,
     },
 
