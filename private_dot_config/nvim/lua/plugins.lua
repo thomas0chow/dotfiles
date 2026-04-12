@@ -5,6 +5,20 @@ vim.api.nvim_create_autocmd("BufWritePost", {
     command = "source <afile> | PackerCompile",
 })
 
+-- Auto PackerCompile if plugins.lua is newer than packer_compiled.lua
+local plugins_file = vim.fn.stdpath("config") .. "/lua/plugins.lua"
+local compiled_file = vim.fn.stdpath("config") .. "/plugin/packer_compiled.lua"
+local plugins_mtime = vim.uv.fs_stat(plugins_file)
+local compiled_mtime = vim.uv.fs_stat(compiled_file)
+if not compiled_mtime or (plugins_mtime and plugins_mtime.mtime.sec > compiled_mtime.mtime.sec) then
+    vim.api.nvim_create_autocmd("VimEnter", {
+        once = true,
+        callback = function()
+            require("packer").compile()
+        end,
+    })
+end
+
 return require("packer").startup(function(use)
     -- Packer can manage itself
     use("wbthomason/packer.nvim")
@@ -115,8 +129,70 @@ return require("packer").startup(function(use)
         requires = "nvim-lua/plenary.nvim",
         config = function()
             require("diffview").setup({
-                watch_index = true,
+                show_help_hints = false,
+                file_panel = {
+                    listing_style = "tree",
+                },
+                keymaps = {
+                    file_panel = {
+                        {
+                            "n", "<CR>",
+                            function()
+                                require("diffview.actions").select_entry()
+                                if vim.o.columns < 180 then
+                                    require("diffview.actions").toggle_files()
+                                end
+                            end,
+                            { desc = "Select entry, close panel if narrow" },
+                        },
+                    },
+                },
+                hooks = {
+                    view_opened = function()
+                        vim.t.diffview_file = "diffview"
+                    end,
+                    diff_buf_win_enter = function(bufnr, _, _)
+                        local name = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bufnr), ":t")
+                        if name ~= "" then
+                            vim.t.diffview_file = name
+                        end
+                    end,
+                    view_closed = function()
+                        vim.t.diffview_file = nil
+                    end,
+                },
             })
+            -- Dynamic file panel: floating when narrow, split when wide
+            require("diffview.config").get_config().file_panel.win_config = function()
+                if vim.o.columns >= 180 then
+                    return { type = "split", position = "left", width = 35, win_opts = {} }
+                else
+                    return {
+                        type = "float",
+                        relative = "editor",
+                        row = 1,
+                        col = 0,
+                        width = 35,
+                        height = math.floor(vim.o.lines * 0.6),
+                        zindex = 50,
+                        border = "rounded",
+                        win_opts = {},
+                    }
+                end
+            end
+            -- Hide the cwd root path line (no config option exists for it)
+            vim.api.nvim_set_hl(0, "DiffviewFilePanelRootPath", { link = "Ignore" })
+
+            -- Watch .git/ for changes and refresh diffview automatically
+            local dw = require("directory-watcher")
+            dw.registerOnChangeHandler("diffview", function()
+                local lib = require("diffview.lib")
+                local view = lib.get_current_view()
+                if view then
+                    view:update_files()
+                end
+            end)
+            dw.setup({ path = vim.fn.getcwd() .. "/.git" })
         end
     })
 

@@ -99,3 +99,33 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 
 -- CsvView
 keyset("n", "<leader>cv", ":CsvViewToggle<CR>", { silent = true })
+
+-- Custom tabline: show diffview current file name on diffview tab
+function _G.MyTabLine()
+    local s = ""
+    for i = 1, vim.fn.tabpagenr("$") do
+        local title = vim.fn.gettabvar(i, "diffview_file", "")
+        if title == "" then
+            local buflist = vim.fn.tabpagebuflist(i)
+            local winnr = vim.fn.tabpagewinnr(i)
+            local bufnr = buflist[winnr]
+            title = vim.fn.fnamemodify(vim.fn.bufname(bufnr), ":t")
+            if title == "" then title = "[No Name]" end
+        end
+        local modified = ""
+        for _, buf in ipairs(vim.fn.tabpagebuflist(i)) do
+            if vim.fn.getbufvar(buf, "&modified") == 1 then
+                modified = " ●"
+                break
+            end
+        end
+        if i == vim.fn.tabpagenr() then
+            s = s .. "%#TabLineSel# " .. title .. modified .. " "
+        else
+            s = s .. "%#TabLine# " .. title .. modified .. " "
+        end
+    end
+    return s .. "%#TabLineFill#"
+end
+vim.opt.tabline = "%!v:lua.MyTabLine()"
+vim.opt.showtabline = 1

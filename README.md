@@ -20,6 +20,13 @@ brew install R
 
 # in R session
 install.packages("languageserver")
+install.packages("tidyverse")
 ```
 
 [Jupyter R](https://irkernel.github.io/installation/#binary-panel)
+
+## Neovim
+
+Config lives in `private_dot_config/nvim/`.
+
+Key plugins: diffview.nvim, nvim-treesitter, csvview.nvim, telescope.nvim
