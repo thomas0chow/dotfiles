@@ -1,41 +1,38 @@
--- Automatically run: PackerCompile
-vim.api.nvim_create_autocmd("BufWritePost", {
-    group = vim.api.nvim_create_augroup("PACKER", { clear = true }),
-    pattern = "plugins.lua",
-    command = "source <afile> | PackerCompile",
-})
-
--- Auto PackerCompile if plugins.lua is newer than packer_compiled.lua
-local plugins_file = vim.fn.stdpath("config") .. "/lua/plugins.lua"
-local compiled_file = vim.fn.stdpath("config") .. "/plugin/packer_compiled.lua"
-local plugins_mtime = vim.uv.fs_stat(plugins_file)
-local compiled_mtime = vim.uv.fs_stat(compiled_file)
-if not compiled_mtime or (plugins_mtime and plugins_mtime.mtime.sec > compiled_mtime.mtime.sec) then
-    vim.api.nvim_create_autocmd("VimEnter", {
-        once = true,
-        callback = function()
-            require("packer").compile()
-        end,
+-- Bootstrap lazy.nvim
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.uv.fs_stat(lazypath) then
+    vim.fn.system({
+        "git", "clone", "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable",
+        lazypath,
     })
 end
+vim.opt.rtp:prepend(lazypath)
 
-return require("packer").startup(function(use)
-    -- Packer can manage itself
-    use("wbthomason/packer.nvim")
+require("lazy").setup({
 
-    -- Common dependencies
-    use("nvim-lua/plenary.nvim")
-    use("nvim-tree/nvim-web-devicons")
-    use("MunifTanjim/nui.nvim")
+    -- Common dependencies (eager)
+    { "nvim-lua/plenary.nvim",       lazy = false },
+    { "nvim-tree/nvim-web-devicons", lazy = false },
+    { "MunifTanjim/nui.nvim",        lazy = false },
 
     -- Theme
-    use("shaunsingh/nord.nvim")
+    {
+        "shaunsingh/nord.nvim",
+        lazy = false,
+        priority = 1000,
+        config = function()
+            vim.cmd("colorscheme nord")
+        end,
+    },
 
     -- File explorer
-    use({
+    {
         "nvim-neo-tree/neo-tree.nvim",
         branch = "v3.x",
-        requires = {
+        cmd = "Neotree",
+        dependencies = {
             "nvim-lua/plenary.nvim",
             "nvim-tree/nvim-web-devicons",
             "MunifTanjim/nui.nvim",
@@ -43,19 +40,18 @@ return require("packer").startup(function(use)
         config = function()
             require("neo-tree").setup({
                 filesystem = {
-                    window = {
-                        position = "float"
-                    }
+                    window = { position = "float" }
                 }
             })
-        end
-    })
+        end,
+    },
 
     -- Fuzzy finder
-    use({
+    {
         "nvim-telescope/telescope.nvim",
         tag = "0.1.4",
-        requires = { "nvim-lua/plenary.nvim" },
+        event = "VeryLazy",
+        dependencies = { "nvim-lua/plenary.nvim" },
         config = function()
             require("telescope").setup {
                 defaults = {
@@ -63,70 +59,85 @@ return require("packer").startup(function(use)
                     layout_config = { height = 0.8 },
                 },
             }
-        end
-    })
+        end,
+    },
 
-    -- Folding
-    use({
+    -- Folding (eager — keymaps in settings.lua require it at startup)
+    {
         "kevinhwang91/nvim-ufo",
-        requires = "kevinhwang91/promise-async",
+        lazy = false,
+        dependencies = { "kevinhwang91/promise-async" },
         config = function()
             require("ufo").setup({
-                provider_selector = function(bufnr, filetype, buftype)
+                provider_selector = function(_, _, _)
                     return { "treesitter", "indent" }
                 end
             })
-        end
-    })
+        end,
+    },
 
-    -- Completion
-    use({
+    -- Completion / LSP
+    {
         "neoclide/coc.nvim",
         branch = "release",
-    })
+        event = "BufReadPre",
+    },
 
     -- Smooth scrolling
-    use({
+    {
         "karb94/neoscroll.nvim",
+        event = "VeryLazy",
         config = function()
             require("neoscroll").setup()
-        end
-    })
+        end,
+    },
 
     -- Markdown preview
-    use({
+    {
         "iamcco/markdown-preview.nvim",
-        run = function() vim.fn["mkdp#util#install"]() end,
-    })
+        ft = "markdown",
+        cmd = { "MarkdownPreview", "MarkdownPreviewStop", "MarkdownPreviewToggle" },
+        build = function() vim.fn["mkdp#util#install"]() end,
+    },
 
     -- Competitive programming
-    use({
+    {
         "xeluxee/competitest.nvim",
-        requires = "MunifTanjim/nui.nvim",
+        cmd = "CompetiTest",
+        dependencies = { "MunifTanjim/nui.nvim" },
         config = function()
             require("competitest").setup {
                 run_command = {
                     python = { exec = "python3", args = { "$(FNAME)" } }
                 }
             }
-        end
-    })
+        end,
+    },
 
     -- Commenting
-    use({
+    {
         "numToStr/Comment.nvim",
+        keys = {
+            { "gc", mode = { "n", "v" } },
+            { "gb", mode = { "n", "v" } },
+        },
         config = function()
             require("Comment").setup()
-        end
-    })
+        end,
+    },
 
     -- Terminal
-    use("voldikss/vim-floaterm")
+    {
+        "voldikss/vim-floaterm",
+        cmd = { "FloatermToggle", "FloatermNew", "FloatermSend" },
+        keys = { "<leader>t" },
+    },
 
-    -- Git diff view
-    use({
+    -- Git diff view (eager — config mutates diffview internals before DiffviewOpen)
+    {
         "sindrets/diffview.nvim",
-        requires = "nvim-lua/plenary.nvim",
+        lazy = false,
+        dependencies = { "nvim-lua/plenary.nvim" },
         config = function()
             require("diffview").setup({
                 show_help_hints = false,
@@ -162,7 +173,6 @@ return require("packer").startup(function(use)
                     end,
                 },
             })
-            -- Dynamic file panel: floating when narrow, split when wide
             require("diffview.config").get_config().file_panel.win_config = function()
                 if vim.o.columns >= 180 then
                     return { type = "split", position = "left", width = 35, win_opts = {} }
@@ -180,59 +190,61 @@ return require("packer").startup(function(use)
                     }
                 end
             end
-            -- Hide the cwd root path line (no config option exists for it)
             vim.api.nvim_set_hl(0, "DiffviewFilePanelRootPath", { link = "Ignore" })
-
-            -- Watch .git/ for changes and refresh diffview automatically
             local dw = require("directory-watcher")
             dw.registerOnChangeHandler("diffview", function()
                 local lib = require("diffview.lib")
                 local view = lib.get_current_view()
-                if view then
-                    view:update_files()
-                end
+                if view then view:update_files() end
             end)
             dw.setup({ path = vim.fn.getcwd() .. "/.git" })
-        end
-    })
+        end,
+    },
 
     -- Center pad
-    use("smithbm2316/centerpad.nvim")
+    { "smithbm2316/centerpad.nvim" },
 
     -- Buffer resize
-    use({
+    {
         "kwkarlwang/bufresize.nvim",
+        event = "VeryLazy",
         config = function()
             require("bufresize").setup()
-        end
-    })
+        end,
+    },
 
-
-
-    use({
+    -- Treesitter (eager — core syntax highlighting)
+    {
         "nvim-treesitter/nvim-treesitter",
+        lazy = false,
         branch = "master",
-        run = function() vim.cmd("TSUpdate") end,
-    })
-    use "stevearc/dressing.nvim"
-    use "MeanderingProgrammer/render-markdown.nvim"
-    use "hrsh7th/nvim-cmp"
-    use "HakonHarnes/img-clip.nvim"
+        build = function() vim.cmd("TSUpdate") end,
+    },
 
-    use({
+    { "stevearc/dressing.nvim",              event = "VeryLazy" },
+    { "MeanderingProgrammer/render-markdown.nvim", ft = "markdown" },
+    { "hrsh7th/nvim-cmp",                    event = "InsertEnter" },
+    { "HakonHarnes/img-clip.nvim",           event = "VeryLazy" },
+
+    {
         "zbirenbaum/copilot.lua",
-        requires = {
-            "copilotlsp-nvim/copilot-lsp", -- (optional) for NES functionality
-        }
-    })
+        event = "InsertEnter",
+        dependencies = { "copilotlsp-nvim/copilot-lsp" },
+    },
 
-    use("esmuellert/codediff.nvim")
+    { "esmuellert/codediff.nvim" },
 
     -- CSV viewer
-    use({
+    {
         "hat0uma/csvview.nvim",
+        cmd = "CsvViewToggle",
         config = function()
             require("csvview").setup()
-        end
-    })
-end)
+        end,
+    },
+
+}, {
+    -- lazy.nvim options
+    install = { colorscheme = { "nord" } },
+    checker = { enabled = false },
+})

@@ -34,17 +34,12 @@ vim.api.nvim_create_autocmd("VimResized", {
     end,
 })
 
-local status, telescope = pcall(require, "telescope.builtin")
-if status then
-	-- Telescope
-	map("n", "<leader>ff", telescope.find_files)
-	map("n", "<leader>fg", telescope.live_grep)
-	map("n", "<leader>fb", telescope.buffers)
-	map("n", "<leader>fh", telescope.help_tags)
-	map("n", "<leader>fs", telescope.git_status)
-	map("n", "<leader>fc", telescope.git_commits)
-else
-	print("Telescope not found")
-end
+-- Telescope
+map("n", "<leader>ff", function() require("telescope.builtin").find_files() end)
+map("n", "<leader>fg", function() require("telescope.builtin").live_grep() end)
+map("n", "<leader>fb", function() require("telescope.builtin").buffers() end)
+map("n", "<leader>fh", function() require("telescope.builtin").help_tags() end)
+map("n", "<leader>fs", function() require("telescope.builtin").git_status() end)
+map("n", "<leader>fc", function() require("telescope.builtin").git_commits() end)
 
 
