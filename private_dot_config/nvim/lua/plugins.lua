@@ -110,7 +110,15 @@ return require("packer").startup(function(use)
     use("voldikss/vim-floaterm")
 
     -- Git diff view
-    use("sindrets/diffview.nvim")
+    use({
+        "sindrets/diffview.nvim",
+        requires = "nvim-lua/plenary.nvim",
+        config = function()
+            require("diffview").setup({
+                watch_index = true,
+            })
+        end
+    })
 
     -- Center pad
     use("smithbm2316/centerpad.nvim")

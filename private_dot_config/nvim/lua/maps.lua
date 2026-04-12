@@ -2,6 +2,18 @@ local function map(mode, lhs, rhs)
 	vim.keymap.set(mode, lhs, rhs, { silent = true })
 end
 
+-- Diffview toggle
+local diffview_open = false
+map("n", "\\dv", function()
+    if diffview_open then
+        vim.cmd("DiffviewClose")
+        diffview_open = false
+    else
+        vim.cmd("DiffviewOpen")
+        diffview_open = true
+    end
+end)
+
 local status, telescope = pcall(require, "telescope.builtin")
 if status then
 	-- Telescope
