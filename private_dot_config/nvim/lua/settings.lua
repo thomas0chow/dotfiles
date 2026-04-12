@@ -26,46 +26,7 @@ vim.opt.showmatch = true
 vim.opt.inccommand = "split"
 vim.o.swapfile = false
 
--- Plug settings
-
 local keyset = vim.keymap.set
-
-function _G.check_back_space()
-    local col = vim.fn.col(".") - 1
-    return col == 0 or vim.fn.getline("."):sub(col, col):match("%s") ~= nil
-end
-
-local opts = { silent = true, noremap = true, expr = true, replace_keycodes = false }
-keyset("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', opts)
-keyset("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], opts)
-
-keyset("i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], opts)
-
-function _G.show_docs()
-    local cw = vim.fn.expand("<cword>")
-    if vim.fn.index({ "vim", "help" }, vim.bo.filetype) >= 0 then
-        vim.api.nvim_command("h " .. cw)
-    elseif vim.api.nvim_eval("coc#rpc#ready()") then
-        vim.fn.CocActionAsync("doHover")
-    else
-        vim.api.nvim_command("!" .. vim.o.keywordprg .. " " .. cw)
-    end
-end
-
-keyset("n", "K", "<CMD>lua _G.show_docs()<CR>", { silent = true })
-
-keyset("n", "<leader>rr", "<Plug>(coc-rename)", { silent = true })
-
-keyset("n", "gd", "<Plug>(coc-definition)", { silent = true })
-keyset("n", "gy", "<Plug>(coc-type-definition)", { silent = true })
-keyset("n", "gi", "<Plug>(coc-implementation)", { silent = true })
-keyset("n", "gr", "<Plug>(coc-references)", { silent = true })
-
--- Formating
-keyset("x", "<leader>f", "<Plug>(coc-format-selected)", { silent = true })
-keyset("n", "<leader>f", "<Plug>(coc-format-selected)", { silent = true })
-vim.api.nvim_create_user_command("Format", "call CocAction('format')", {})
-vim.cmd [[autocmd BufWritePre *.cc,*.hh : call CocAction('format')]]
 
 -- nvim-ufo
 vim.o.foldcolumn = '1' -- '0' is not bad
@@ -87,16 +48,6 @@ vim.g.floaterm_keymap_toggle = "<leader>t"
 vim.g.floaterm_wintype = "split"
 vim.g.floaterm_height = 0.25
 vim.g.floaterm_shell = "env LANG=en_US.UTF-8 zsh"
-
--- django html template
-vim.api.nvim_create_autocmd("BufWritePre", {
-    pattern = "*.html",
-    callback = function()
-        if vim.bo.filetype == "htmldjango" then
-            vim.cmd("CocCommand htmldjango.djlint.format")
-        end
-    end
-})
 
 -- CsvView
 keyset("n", "<leader>cv", ":CsvViewToggle<CR>", { silent = true })

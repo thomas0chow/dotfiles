@@ -88,11 +88,109 @@ require("lazy").setup({
         end,
     },
 
-    -- Completion / LSP
+    -- LSP: server installer
     {
-        "neoclide/coc.nvim",
-        branch = "release",
-        event = "BufReadPre",
+        "williamboman/mason.nvim",
+        cmd = "Mason",
+        build = ":MasonUpdate",
+        config = function()
+            require("mason").setup()
+        end,
+    },
+
+    -- LSP: bridge mason <-> lspconfig
+    {
+        "williamboman/mason-lspconfig.nvim",
+        dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
+        config = function()
+            require("mason-lspconfig").setup({
+                ensure_installed = { "pyright", "clangd", "ts_ls", "html", "vue_ls", "gopls", "lua_ls", "jsonls" },
+                automatic_enable = false,
+            })
+        end,
+    },
+
+    -- LSP: server configs
+    {
+        "neovim/nvim-lspconfig",
+        event = { "BufReadPre", "BufNewFile" },
+        dependencies = { "saghen/blink.cmp", "williamboman/mason-lspconfig.nvim" },
+        config = function()
+            -- Pass blink.cmp capabilities to all servers
+            vim.lsp.config("*", {
+                capabilities = require("blink.cmp").get_lsp_capabilities(),
+            })
+
+            vim.lsp.config("lua_ls", {
+                settings = {
+                    Lua = {
+                        runtime = { version = "LuaJIT" },
+                        workspace = {
+                            checkThirdParty = false,
+                            library = vim.api.nvim_get_runtime_file("", true),
+                        },
+                        diagnostics = { globals = { "vim" } },
+                    },
+                },
+            })
+
+            vim.lsp.enable({ "pyright", "clangd", "ts_ls", "html", "vue_ls", "gopls", "lua_ls", "jsonls" })
+
+            -- Keymaps on attach
+            vim.api.nvim_create_autocmd("LspAttach", {
+                callback = function(ev)
+                    local map = function(mode, lhs, rhs)
+                        vim.keymap.set(mode, lhs, rhs, { silent = true, buffer = ev.buf })
+                    end
+                    map("n", "gd", vim.lsp.buf.definition)
+                    map("n", "gy", vim.lsp.buf.type_definition)
+                    map("n", "gi", vim.lsp.buf.implementation)
+                    map("n", "gr", vim.lsp.buf.references)
+                    map("n", "K", vim.lsp.buf.hover)
+                    map("n", "<leader>rr", vim.lsp.buf.rename)
+                    map({ "n", "x" }, "<leader>f", function()
+                        require("conform").format({ bufnr = ev.buf, lsp_fallback = true })
+                    end)
+                end,
+            })
+        end,
+    },
+
+    -- Completion
+    {
+        "saghen/blink.cmp",
+        version = "*",
+        opts = {
+            keymap = { preset = "super-tab" },
+            sources = {
+                default = { "lsp", "path", "buffer" },
+            },
+        },
+    },
+
+    -- Formatting
+    {
+        "stevearc/conform.nvim",
+        event = "BufWritePre",
+        config = function()
+            require("conform").setup({
+                formatters_by_ft = {
+                    python     = { "isort", "black" },
+                    cpp        = { "clang_format" },
+                    c          = { "clang_format" },
+                    javascript = { "prettier" },
+                    typescript = { "prettier" },
+                    vue        = { "prettier" },
+                    htmldjango = { "djlint" },
+                    json       = { "prettier" },
+                    jsonc      = { "prettier" },
+                },
+                format_on_save = {
+                    timeout_ms   = 500,
+                    lsp_fallback = true,
+                },
+            })
+        end,
     },
 
     -- Smooth scrolling
@@ -235,7 +333,6 @@ require("lazy").setup({
 
     { "stevearc/dressing.nvim",              event = "VeryLazy" },
     { "MeanderingProgrammer/render-markdown.nvim", ft = "markdown" },
-    { "hrsh7th/nvim-cmp",                    event = "InsertEnter" },
     { "HakonHarnes/img-clip.nvim",           event = "VeryLazy" },
 
     {
