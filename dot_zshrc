@@ -167,5 +167,10 @@ if [[ -f "$HOME/work/claude_api.txt" ]]; then
   export ANTHROPIC_API_KEY=$(cat "$HOME/work/claude_api.txt" | tr -d '\n')
 fi
 
+# Company PC: Cato Networks CA cert
+if [[ -f "$HOME/.cato/CatoNetworksTrustedRootCA.pem" ]]; then
+  export NODE_EXTRA_CA_CERTS="$HOME/.cato/CatoNetworksTrustedRootCA.pem"
+fi
+
 # Amazon Q post block. Keep at the bottom of this file.
 [[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
