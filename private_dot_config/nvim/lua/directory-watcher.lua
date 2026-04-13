@@ -48,15 +48,13 @@ M.setup = function(opts)
       M.stop()
       return
     end
-    if filename then
-      local full_path = path .. "/" .. filename
-      for _, handler in pairs(on_change_handlers) do
-        pcall(handler, full_path, events)
-      end
+    local full_path = filename and (path .. "/" .. filename) or path
+    for _, handler in pairs(on_change_handlers) do
+      pcall(handler, full_path, events)
     end
   end, debounce_delay)
 
-  local ok = fs_event:start(path, { recursive = false }, vim.schedule_wrap(on_change))
+  local ok = fs_event:start(path, { recursive = true }, vim.schedule_wrap(on_change))
   if ok ~= 0 then
     return false
   end

@@ -279,7 +279,9 @@ require("lazy").setup({
                             function()
                                 require("diffview.actions").select_entry()
                                 if vim.o.columns < 180 then
-                                    require("diffview.actions").toggle_files()
+                                    vim.schedule(function()
+                                        require("diffview.actions").toggle_files()
+                                    end)
                                 end
                             end,
                             { desc = "Select entry, close panel if narrow" },
@@ -323,7 +325,10 @@ require("lazy").setup({
             dw.registerOnChangeHandler("diffview", function()
                 local lib = require("diffview.lib")
                 local view = lib.get_current_view()
-                if view then view:update_files() end
+                if view then
+                    view:update_files()
+                    vim.cmd("DiffviewRefresh")
+                end
             end)
             dw.setup({ path = vim.fn.getcwd() .. "/.git" })
         end,
