@@ -16,6 +16,7 @@ require("lazy").setup({
     { "nvim-lua/plenary.nvim",       lazy = false },
     { "nvim-tree/nvim-web-devicons", lazy = false },
     { "MunifTanjim/nui.nvim",        lazy = false },
+    { "stevearc/dressing.nvim",      lazy = false, opts = {} },
 
     -- Themes (all eager so they're available for the selector)
     { "shaunsingh/nord.nvim",  lazy = false, priority = 1000 },
