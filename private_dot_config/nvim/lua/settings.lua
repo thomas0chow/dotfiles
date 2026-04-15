@@ -38,12 +38,6 @@ keyset('n', 'zm', require('ufo').closeFoldsWith) -- closeAllFolds == closeFoldsW
 -- neo-tree
 keyset("n", "<leader>bb", ":Neotree toggle<CR>", { silent = true })
 
--- floaterm
-vim.g.floaterm_keymap_toggle = "<leader>t"
-vim.g.floaterm_wintype = "split"
-vim.g.floaterm_height = 0.25
-vim.g.floaterm_shell = "env LANG=en_US.UTF-8 zsh"
-
 -- CsvView
 keyset("n", "<leader>cv", ":CsvViewToggle<CR>", { silent = true })
 
