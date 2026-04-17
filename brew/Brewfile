@@ -39,6 +39,8 @@ brew "tree"
 brew "wget"
 brew "yapf", link: false
 brew "zsh-autosuggestions"
+cask "font-fontawesome"
+cask "font-hack-nerd-font"
 cask "google-cloud-sdk"
 cask "iina"
 cask "miniforge"

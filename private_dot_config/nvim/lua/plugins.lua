@@ -190,7 +190,13 @@ require("lazy").setup({
 		"saghen/blink.cmp",
 		version = "*",
 		opts = {
-			keymap = { preset = "super-tab" },
+			keymap = {
+				["<CR>"] = { "accept", "fallback" },
+				["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
+				["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
+				["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
+				["<C-e>"] = { "hide", "fallback" },
+			},
 			sources = {
 				default = { "lsp", "path", "buffer" },
 			},

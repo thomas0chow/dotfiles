@@ -15,7 +15,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 
 # ZSH_THEME="robbyrussell"
-ZSH_THEME="headline/headline"
+ZSH_THEME="nord-extended/nord"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -91,9 +91,6 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-
-# Theme headline
-export HEADLINE_DO_CLOCK="true"
 
 # Auto upgrade
 # to check for updates once a month
