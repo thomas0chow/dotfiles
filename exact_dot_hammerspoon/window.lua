@@ -17,6 +17,22 @@ hs.hotkey.bind({ "alt", "cmd" }, "f", function() hs.window.focusedWindow():moveT
 -- center screen
 hs.hotkey.bind({ "alt", "cmd" }, "c", function() hs.window.focusedWindow():centerOnScreen() end)
 
+-- open Chrome new window on current screen, left half (alt + cmd + b)
+hs.hotkey.bind({ "alt", "cmd" }, "b", function()
+    local targetScreen = hs.window.focusedWindow() and hs.window.focusedWindow():screen() or hs.screen.mainScreen()
+
+    local watcher
+    watcher = hs.window.filter.new(false):setAppFilter("Google Chrome")
+    watcher:subscribe(hs.window.filter.windowCreated, function(win)
+        watcher:unsubscribeAll()
+        win:moveToScreen(targetScreen, true)
+        win:moveToUnit({ 0, 0, 0.5, 1 })
+        win:focus()
+    end)
+
+    hs.osascript.applescript('tell application "Google Chrome" to make new window')
+end)
+
 
 -- close focus windows
 hs.hotkey.bind({ "alt", "cmd" }, "q", function() hs.window.focusedWindow():close() end)
