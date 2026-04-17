@@ -36,7 +36,7 @@ require("lazy").setup({
 					vim.cmd("colorscheme nord")
 				end,
 				set_light_mode = function()
-					vim.cmd("colorscheme rose-pine-dawn")
+					vim.cmd("colorscheme nord")
 				end,
 			})
 		end,
